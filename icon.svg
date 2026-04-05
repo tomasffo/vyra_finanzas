@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Fondo -->
+  <rect width="512" height="512" rx="115" fill="#006565"/>
+  <!-- Gradiente sutil -->
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#008080"/>
+      <stop offset="100%" stop-color="#004d4d"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="115" fill="url(#g)"/>
+  <!-- Letra V estilizada -->
+  <polyline
+    points="130,160 256,370 382,160"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="52"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <!-- Punto acento verde -->
+  <circle cx="256" cy="370" r="28" fill="#93f993"/>
+</svg>
