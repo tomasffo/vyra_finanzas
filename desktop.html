@@ -956,16 +956,10 @@ tailwind.config = {
     <!-- ══ PANEL: GASTOS ══ -->
     <div class="panel" id="panel-gastos">
 
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:28px;gap:16px">
-        <div class="page-header" style="margin-bottom:0">
-          <div class="page-label">Resumen Mensual</div>
-          <div class="page-title">1.228,50 €</div>
-          <div class="page-subtitle">Total gastado en Octubre · <span style="color:#006e20;font-weight:700">↓ 12% menos que el mes anterior</span></div>
-        </div>
-        <button class="btn-primary" style="width:auto;flex-shrink:0;margin-top:4px" onclick="openModal('modal-gasto')">
-          <span class="material-symbols-outlined" style="font-size:16px">add</span>
-          Añadir gasto
-        </button>
+      <div class="page-header">
+        <div class="page-label">Resumen Mensual</div>
+        <div class="page-title">1.228,50 €</div>
+        <div class="page-subtitle">Total gastado en Octubre · <span style="color:#006e20;font-weight:700">↓ 12% menos que el mes anterior</span></div>
       </div>
 
       <!-- Scan + categories -->
@@ -1095,16 +1089,10 @@ tailwind.config = {
     <!-- ══ PANEL: METAS ══ -->
     <div class="panel" id="panel-metas">
 
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:28px">
-        <div class="page-header" style="margin-bottom:0">
-          <div class="page-label">Finanzas Personales</div>
-          <div class="page-title">Metas de Ahorro</div>
-          <div class="page-subtitle">Tu camino hacia nuevas metas.</div>
-        </div>
-        <button class="btn-primary" style="width:auto;flex-shrink:0;margin-top:4px" onclick="openModal('modal-objetivo')">
-          <span class="material-symbols-outlined" style="font-size:16px">add</span>
-          Nuevo objetivo
-        </button>
+      <div class="page-header">
+        <div class="page-label">Finanzas Personales</div>
+        <div class="page-title">Metas de Ahorro</div>
+        <div class="page-subtitle">Tu camino hacia nuevas metas.</div>
       </div>
 
       <!-- Global progress -->
@@ -1445,7 +1433,7 @@ tailwind.config = {
               </div>
             </div>
             <p style="font-family:'Manrope',sans-serif;font-weight:800;font-size:1.1rem">Tomás Raffo</p>
-            <p style="font-size:0.78rem;color:#9aacac;margin-bottom:16px">tomas@vyrafinanzas.app</p>
+            <p style="font-size:0.78rem;color:#9aacac;margin-bottom:16px"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="81f5eeece0f2c1f7f8f3e0e7e8efe0effbe0f2afe0f1f1">[email&#160;protected]</a></p>
             <button class="btn-secondary" style="width:100%;font-size:0.82rem;padding:9px">Editar perfil</button>
           </div>
           <!-- Health score -->
@@ -1499,7 +1487,7 @@ tailwind.config = {
                 </div>
                 <div style="flex:1">
                   <p style="font-weight:600;font-size:0.85rem">Email</p>
-                  <p style="font-size:0.75rem;color:#9aacac">tomas@vyrafinanzas.app</p>
+                  <p style="font-size:0.75rem;color:#9aacac"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d1a5bebcb0a291a7a8a3b0b7b8bfb0bfabb0a2ffb0a1a1">[email&#160;protected]</a></p>
                 </div>
                 <span class="material-symbols-outlined" style="color:#bdc9c8;font-size:18px">chevron_right</span>
               </div>
@@ -1791,7 +1779,7 @@ tailwind.config = {
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const panelTitles = {
     dashboard: 'Inicio',
     gastos: 'Gastos',
@@ -1990,12 +1978,4 @@ tailwind.config = {
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px">
         <button class="btn-secondary" onclick="closeModal('modal-tarjeta')">Cancelar</button>
-        <button class="btn-primary" onclick="closeModal('modal-tarjeta')"><span class="material-symbols-outlined icon-filled" style="font-size:16px">credit_card</span> Solicitar mi tarjeta</button>
-      </div>
-      <p style="text-align:center;font-size:0.72rem;color:#9aacac;margin-top:14px;line-height:1.5">Al solicitar aceptas los <span style="color:#006565;font-weight:600;cursor:pointer">términos y condiciones</span> de la Tarjeta Vyra.</p>
-    </div>
-  </div>
-</div>
-
-</body>
-</html>
+        <button class="btn-primary" onclick="closeModal('modal-tarjeta')"><span class="material-symbols-outlined icon-filled" style="fo
