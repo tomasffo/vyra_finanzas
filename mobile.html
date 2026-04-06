@@ -4,21 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Vyra Finanzas</title>
-
-<!-- PWA: Manifest -->
-<link rel="manifest" href="manifest.json">
-
-<!-- PWA: iOS Safari -->
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Vyra">
-<link rel="apple-touch-icon" href="icons/icon-180.png">
-
-<!-- PWA: Theme color (colorea la barra del navegador) -->
-<meta name="theme-color" content="#006565">
-
-<!-- PWA: Descripción para SEO/compartir -->
-<meta name="description" content="Tu app de finanzas personales inteligente">
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
@@ -289,6 +274,12 @@ tailwind.config = {
     animation: fadeSlideIn 0.4s ease forwards;
   }
 
+  /* Aprender: all interactive elements are decorative */
+  #screen-3 button, #screen-3 a {
+    pointer-events: none;
+    cursor: default;
+  }
+
   /* ===== MODAL SHEETS ===== */
   .modal-sheet {
     position: fixed;
@@ -520,8 +511,17 @@ tailwind.config = {
 <!-- Total Balance Card -->
 <section class="main-gradient rounded-lg p-8 text-on-primary-container shadow-[0_16px_32px_rgba(0,101,101,0.15)] relative overflow-hidden">
 <div class="relative z-10">
-<p class="font-label text-sm uppercase tracking-widest opacity-80 mb-2" style="">Saldo Total</p>
-<h2 class="font-headline text-4xl font-extrabold tracking-tight mb-6" style="">24.857,23€</h2>
+<div class="flex items-center gap-1.5 mb-1">
+  <p class="font-label text-sm uppercase tracking-widest opacity-80">Saldo Total</p>
+  <div class="relative group">
+    <span class="material-symbols-outlined text-sm opacity-60 cursor-pointer" style="font-variation-settings:'FILL' 1">info</span>
+    <div class="absolute left-0 top-6 w-56 bg-on-surface text-white text-xs rounded-xl p-3 leading-relaxed z-50 opacity-0 group-active:opacity-100 transition-opacity pointer-events-none" style="font-family:'Inter',sans-serif">
+      Suma de tu cuenta corriente, efectivo disponible y cualquier saldo pendiente de cobro.
+    </div>
+  </div>
+</div>
+<h2 class="font-headline text-4xl font-extrabold tracking-tight mb-1" style="">24.857,23€</h2>
+<p class="text-xs opacity-60 mb-4" style="font-family:'Inter',sans-serif">Cuenta corriente · Efectivo · Pendiente de cobro</p>
 <div class="flex items-center gap-2 bg-white/10 backdrop-blur-md w-fit px-3 py-1 rounded-full">
 <span class="material-symbols-outlined text-sm" style="font-variation-settings: &quot;FILL&quot; 1;">trending_up</span>
 <span class="text-xs font-semibold" style="">+2.4% este mes</span>
@@ -722,30 +722,114 @@ tailwind.config = {
 </div>
 </div>
 </section>
-<!-- Visual Analytics -->
+<!-- Gasto diario esta semana -->
 <section class="mb-12">
-<div class="bg-white/40 dark:bg-slate-800/40 backdrop-blur-[12px] p-6 rounded-lg border border-outline-variant/10 shadow-sm">
-<h3 class="font-headline text-lg font-bold mb-4" style="">Velocidad de Gasto</h3>
-<div class="relative h-40 w-full flex items-end justify-between gap-2 px-2">
-<div class="w-full bg-surface-container-high rounded-t-full h-[30%] transition-all duration-500"></div>
-<div class="w-full bg-surface-container-high rounded-t-full h-[25%] transition-all duration-500"></div>
-<div class="w-full bg-primary-container rounded-t-full h-[65%] transition-all duration-500"></div>
-<div class="w-full bg-primary rounded-t-full h-[75%] transition-all duration-500"></div>
-<div class="w-full bg-surface-container-high rounded-t-full h-[20%] transition-all duration-500"></div>
-<div class="w-full bg-surface-container-high rounded-t-full h-[35%] transition-all duration-500"></div>
-<div class="w-full bg-surface-container-high rounded-t-full h-[15%] transition-all duration-500"></div>
-</div>
-<div class="flex justify-between mt-4 px-2">
-<span class="text-[10px] font-bold text-outline uppercase tracking-wider" style="">LUN</span>
-<span class="text-[10px] font-bold text-outline uppercase tracking-wider" style="">MAR</span>
-<span class="text-[10px] font-bold text-primary uppercase tracking-wider" style="">MIÉ</span>
-<span class="text-[10px] font-bold text-primary uppercase tracking-wider" style="">JUE</span>
-<span class="text-[10px] font-bold text-outline uppercase tracking-wider" style="">VIE</span>
-<span class="text-[10px] font-bold text-outline uppercase tracking-wider" style="">SÁ</span>
-<span class="text-[10px] font-bold text-outline uppercase tracking-wider" style="">DOM</span>
-</div>
+<div class="bg-white rounded-lg p-5 shadow-sm border border-outline-variant/10">
+  <!-- Header -->
+  <div class="flex justify-between items-start mb-1">
+    <div>
+      <h3 class="font-headline text-base font-bold text-on-surface">Gasto diario</h3>
+      <p class="text-xs text-on-surface-variant mt-0.5">Esta semana · Octubre 2023</p>
+    </div>
+    <div class="text-right">
+      <p class="font-headline font-bold text-lg text-on-surface">284,50 €</p>
+      <p class="text-[10px] text-on-surface-variant">total semana</p>
+    </div>
+  </div>
+  <!-- Media diaria -->
+  <div class="flex items-center gap-1.5 mb-5 mt-2">
+    <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+    <p class="text-xs text-on-surface-variant">Media diaria: <span class="font-bold text-on-surface">40,64 €</span> · Presupuesto día: <span class="font-bold text-primary">46,67 €</span></p>
+  </div>
+  <!-- Barras -->
+  <div class="relative">
+    <!-- Línea de presupuesto diario -->
+    <div class="absolute w-full border-t border-dashed border-primary/30" style="bottom: 32px; top: auto; height: 0; pointer-events:none">
+      <span class="absolute -top-4 right-0 text-[9px] font-bold text-primary/60 uppercase tracking-wider">límite 46,67€</span>
+    </div>
+    <div id="chart-mobile" class="flex items-end justify-between gap-2 px-1" style="height:120px">
+      <!-- bars rendered by JS -->
+    </div>
+    <!-- Tooltip -->
+    <div id="chart-tooltip-mobile" class="hidden absolute -top-8 bg-on-surface text-white text-xs font-bold px-2 py-1 rounded-lg pointer-events-none" style="transform:translateX(-50%)"></div>
+  </div>
+  <!-- Días -->
+  <div id="chart-labels-mobile" class="flex justify-between mt-2 px-1">
+    <!-- labels rendered by JS -->
+  </div>
+  <!-- Leyenda -->
+  <div class="flex gap-4 mt-4 pt-3 border-t border-outline-variant/20">
+    <div class="flex items-center gap-1.5">
+      <div class="w-3 h-3 rounded-sm bg-primary"></div>
+      <span class="text-[10px] text-on-surface-variant font-medium">Gasto real</span>
+    </div>
+    <div class="flex items-center gap-1.5">
+      <div class="w-3 h-3 rounded-sm bg-error/70"></div>
+      <span class="text-[10px] text-on-surface-variant font-medium">Supera el límite</span>
+    </div>
+    <div class="flex items-center gap-1.5">
+      <div class="w-3 h-3 rounded-sm bg-surface-container-high"></div>
+      <span class="text-[10px] text-on-surface-variant font-medium">Sin datos</span>
+    </div>
+  </div>
 </div>
 </section>
+<script>
+(function() {
+  const days   = ['LUN','MAR','MIÉ','JUE','VIE','SÁB','DOM'];
+  const values = [38.2, 25.0, 89.5, 91.8, 18.0, 22.0, null]; // null = hoy/sin datos
+  const limit  = 46.67;
+  const maxVal = 100;
+
+  const chart  = document.getElementById('chart-mobile');
+  const labels = document.getElementById('chart-labels-mobile');
+  const tooltip = document.getElementById('chart-tooltip-mobile');
+
+  days.forEach((day, i) => {
+    const val = values[i];
+    const pct = val !== null ? Math.round((val / maxVal) * 100) : 0;
+    const over = val !== null && val > limit;
+    const isToday = i === 6;
+
+    // Bar wrapper
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;position:relative';
+
+    // Value label on top
+    const lbl = document.createElement('span');
+    lbl.style.cssText = 'font-size:9px;font-weight:700;color:' + (val===null?'#bdc9c8': over?'#ba1a1a':'#006565');
+    lbl.textContent = val !== null ? val.toFixed(0)+'€' : '';
+    wrap.appendChild(lbl);
+
+    // Bar
+    const bar = document.createElement('div');
+    bar.style.cssText = `width:100%;border-radius:4px 4px 0 0;transition:height .4s ease;height:${val!==null?pct:8}%;background:${isToday?'#e8ecec': over?'#f4a0a0':'#006565'}`;
+    if (isToday) bar.style.border = '1.5px dashed #bdc9c8';
+
+    // Touch tooltip
+    if (val !== null) {
+      bar.addEventListener('click', (e) => {
+        const rect = wrap.getBoundingClientRect();
+        const chartRect = chart.getBoundingClientRect();
+        tooltip.textContent = day + ': ' + val.toFixed(2) + ' €';
+        tooltip.style.left = (rect.left - chartRect.left + rect.width/2) + 'px';
+        tooltip.style.bottom = (pct + 30) + '%';
+        tooltip.classList.remove('hidden');
+        tooltip.classList.add('block');
+        setTimeout(() => { tooltip.classList.add('hidden'); tooltip.classList.remove('block'); }, 2000);
+      });
+    }
+    wrap.appendChild(bar);
+    chart.appendChild(wrap);
+
+    // Label
+    const dayEl = document.createElement('span');
+    dayEl.style.cssText = `flex:1;text-align:center;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:${isToday?'#bdc9c8': over?'#ba1a1a':'#006565'}`;
+    dayEl.textContent = day;
+    labels.appendChild(dayEl);
+  });
+})();
+</script>
 </main>
     </div>
 
@@ -767,8 +851,17 @@ tailwind.config = {
 <section class="grid grid-cols-2 gap-4 mb-10">
 <div class="col-span-2 bg-gradient-to-br from-primary to-primary-container p-6 rounded-lg text-white relative overflow-hidden">
 <div class="relative z-10">
-<p class="text-on-primary-container/80 text-sm font-medium mb-1" style="">Total Ahorrado</p>
-<h2 class="text-3xl font-headline font-bold mb-4" style="">12.456,22 €</h2>
+<div class="flex items-center gap-1.5 mb-1">
+  <p class="text-on-primary-container/80 text-sm font-medium">Total Ahorrado</p>
+  <div class="relative group">
+    <span class="material-symbols-outlined text-sm opacity-70 cursor-pointer" style="font-variation-settings:'FILL' 1">info</span>
+    <div class="absolute left-0 top-6 w-60 bg-on-surface text-white text-xs rounded-xl p-3 leading-relaxed z-50 opacity-0 group-active:opacity-100 transition-opacity pointer-events-none" style="font-family:'Inter',sans-serif;color:#e0fafa">
+      Suma de todas tus wallets, fondos de ahorro e inversiones. No incluye el saldo corriente del día a día.
+    </div>
+  </div>
+</div>
+<h2 class="text-3xl font-headline font-bold mb-1" style="">12.456,22 €</h2>
+<p class="text-xs opacity-60 mb-4" style="font-family:'Inter',sans-serif">Wallets · Metas de ahorro · Inversiones</p>
 <div class="w-full bg-white/20 h-2 rounded-full overflow-hidden">
 <div class="bg-secondary-fixed h-full w-[65%]"></div>
 </div>
@@ -875,12 +968,132 @@ tailwind.config = {
 </main>
     </div>
 
+  <!-- SCREEN 5: PAGOS -->
+  <div class="screen" id="screen-5">
+    <div class="top-bar">
+      <div style="width:22px"></div>
+      <span class="top-bar-title">Pagos</span>
+      <div style="width:22px"></div>
+    </div>
+    <main class="pt-4 pb-32 px-5 max-w-lg mx-auto space-y-6">
+
+      <!-- Bizum -->
+      <section>
+        <p style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#6e7979;padding:0 4px;margin-bottom:10px">Bizum</p>
+        <div style="background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 2px 12px rgba(0,101,101,0.07)">
+          <!-- Hero Bizum -->
+          <div style="background:linear-gradient(135deg,#0a1172,#2d3adb);padding:24px;position:relative;overflow:hidden">
+            <div style="position:relative;z-index:1">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+                <div style="background:rgba(255,255,255,0.15);border-radius:10px;width:36px;height:36px;display:flex;align-items:center;justify-content:center">
+                  <span class="material-symbols-outlined" style="color:white;font-size:20px;font-variation-settings:'FILL' 1">bolt</span>
+                </div>
+                <span style="font-family:'Manrope',sans-serif;font-weight:800;font-size:1.1rem;color:white;letter-spacing:-0.02em">Bizum</span>
+              </div>
+              <p style="font-size:0.82rem;color:rgba(255,255,255,0.75);line-height:1.5;max-width:240px">Envía y recibe dinero al instante con tu número de teléfono.</p>
+            </div>
+            <div style="position:absolute;right:-20px;top:-20px;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,0.06)"></div>
+          </div>
+          <!-- Acciones Bizum -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#f3f4f5">
+            <div onclick="openModal('modal-bizum-enviar')" style="background:#fff;padding:18px 16px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;transition:background .15s" ontouchstart="this.style.background='#f0fafa'" ontouchend="this.style.background='#fff'">
+              <div style="width:44px;height:44px;border-radius:50%;background:#e0fafa;display:flex;align-items:center;justify-content:center">
+                <span class="material-symbols-outlined" style="color:#006565;font-size:22px;font-variation-settings:'FILL' 1">north_east</span>
+              </div>
+              <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:0.82rem;color:#191c1d">Enviar</span>
+            </div>
+            <div onclick="openModal('modal-bizum-solicitar')" style="background:#fff;padding:18px 16px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer" ontouchstart="this.style.background='#f0fafa'" ontouchend="this.style.background='#fff'">
+              <div style="width:44px;height:44px;border-radius:50%;background:#e6fce6;display:flex;align-items:center;justify-content:center">
+                <span class="material-symbols-outlined" style="color:#006e20;font-size:22px;font-variation-settings:'FILL' 1">south_west</span>
+              </div>
+              <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:0.82rem;color:#191c1d">Solicitar</span>
+            </div>
+          </div>
+          <!-- Últimos Bizum -->
+          <div style="padding:16px">
+            <p style="font-size:0.72rem;font-weight:700;color:#9aacac;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px">Recientes</p>
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <div class="cfg-row" style="padding:10px 4px;border-radius:12px">
+                <div style="width:38px;height:38px;border-radius:50%;background:#e0fafa;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Manrope',sans-serif;font-weight:800;font-size:0.8rem;color:#006565">ML</div>
+                <div style="flex:1">
+                  <p style="font-weight:700;font-size:0.85rem">María López</p>
+                  <p style="font-size:0.72rem;color:#9aacac">Ayer · Cena</p>
+                </div>
+                <p style="font-family:'Manrope',sans-serif;font-weight:800;font-size:0.9rem;color:#ba1a1a">-18,50 €</p>
+              </div>
+              <div class="cfg-row" style="padding:10px 4px;border-radius:12px">
+                <div style="width:38px;height:38px;border-radius:50%;background:#e6fce6;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Manrope',sans-serif;font-weight:800;font-size:0.8rem;color:#006e20">JR</div>
+                <div style="flex:1">
+                  <p style="font-weight:700;font-size:0.85rem">Juan Ruiz</p>
+                  <p style="font-size:0.72rem;color:#9aacac">Lunes · Gasolina</p>
+                </div>
+                <p style="font-family:'Manrope',sans-serif;font-weight:800;font-size:0.9rem;color:#006e20">+30,00 €</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tarjeta Vyra -->
+      <section>
+        <p style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#6e7979;padding:0 4px;margin-bottom:10px">Tarjeta Vyra</p>
+        <div style="background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 2px 12px rgba(0,101,101,0.07)">
+          <!-- Card visual -->
+          <div style="background:linear-gradient(135deg,#003535,#006565);padding:24px;margin:16px;border-radius:16px;position:relative;overflow:hidden;min-height:160px">
+            <div style="position:relative;z-index:1">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px">
+                <svg width="36" height="22" viewBox="0 0 36 22" fill="none"><rect width="36" height="22" rx="4" fill="rgba(255,255,255,0.15)"/><circle cx="13" cy="11" r="7" fill="rgba(255,255,255,0.5)"/><circle cx="23" cy="11" r="7" fill="rgba(255,255,255,0.3)"/></svg>
+                <span style="font-family:'Manrope',sans-serif;font-weight:800;font-size:1rem;color:rgba(255,255,255,0.9)">Vyra</span>
+              </div>
+              <p style="font-family:'Courier New',monospace;color:rgba(255,255,255,0.7);font-size:0.85rem;letter-spacing:0.2em;margin-bottom:14px">•••• •••• •••• ----</p>
+              <div style="display:flex;justify-content:space-between;align-items:flex-end">
+                <div>
+                  <p style="font-size:0.6rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.1em">Titular</p>
+                  <p style="font-family:'Manrope',sans-serif;font-weight:700;color:white;font-size:0.88rem">Tomás Raffo</p>
+                </div>
+                <span style="background:rgba(147,249,147,0.25);color:#93f993;font-size:0.65rem;font-weight:700;padding:3px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:0.08em">Solicitar</span>
+              </div>
+            </div>
+            <div style="position:absolute;right:-20px;bottom:-20px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,0.04)"></div>
+          </div>
+          <!-- Beneficios -->
+          <div style="padding:0 16px 16px">
+            <p style="font-size:0.72rem;font-weight:700;color:#9aacac;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px">Beneficios incluidos</p>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:center;gap:12px">
+                <span class="material-symbols-outlined" style="color:#93f993;font-size:18px;font-variation-settings:'FILL' 1">check_circle</span>
+                <span style="font-size:0.85rem;font-weight:500;color:#191c1d">Sin comisiones en compras en el extranjero</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px">
+                <span class="material-symbols-outlined" style="color:#93f993;font-size:18px;font-variation-settings:'FILL' 1">check_circle</span>
+                <span style="font-size:0.85rem;font-weight:500;color:#191c1d">Cashback del 1% en todas las compras</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px">
+                <span class="material-symbols-outlined" style="color:#93f993;font-size:18px;font-variation-settings:'FILL' 1">check_circle</span>
+                <span style="font-size:0.85rem;font-weight:500;color:#191c1d">Retiros en cajeros sin coste (hasta 300 €/mes)</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px">
+                <span class="material-symbols-outlined" style="color:#93f993;font-size:18px;font-variation-settings:'FILL' 1">check_circle</span>
+                <span style="font-size:0.85rem;font-weight:500;color:#191c1d">Compatible con Apple Pay y Google Pay</span>
+              </div>
+            </div>
+            <button onclick="openModal('modal-tarjeta')" style="width:100%;margin-top:18px;background:linear-gradient(135deg,#006565,#008080);color:white;border:none;border-radius:14px;padding:15px;font-family:'Manrope',sans-serif;font-weight:800;font-size:0.95rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px">
+              <span class="material-symbols-outlined" style="font-size:18px;font-variation-settings:'FILL' 1">credit_card</span>
+              Solicitar tarjeta gratis
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
     <!-- SCREEN 3: APRENDER -->
     <div class="screen" id="screen-3">
       <div class="top-bar">
         <div style="width:22px"></div>
         <span class="top-bar-title">Aprender</span>
-        <span class="material-symbols-outlined" style="color:#006565;font-size:22px">more_horiz</span>
+        <div style="width:22px"></div>
       </div>
       <main class="px-6 pb-32 space-y-8 max-w-2xl mx-auto overflow-y-auto">
 <!-- Overall Learning Progress -->
@@ -997,7 +1210,7 @@ tailwind.config = {
       <div class="top-bar">
         <div style="width:22px"></div>
         <span class="top-bar-title">Perfil</span>
-        <span class="material-symbols-outlined" style="color:#006565;font-size:22px;cursor:pointer" onclick="openModal('modal-config')">settings</span>
+        <span class="material-symbols-outlined" style="color:#006565;font-size:22px;cursor:pointer;font-variation-settings:'FILL' 1" onclick="openModal('modal-config')">settings</span>
       </div>
       <main class="pt-2 pb-32 px-6 max-w-2xl mx-auto space-y-8 overflow-y-auto">
 <!-- Profile Hero Section -->
@@ -1054,7 +1267,7 @@ tailwind.config = {
 <section class="space-y-4">
 <div class="flex justify-between items-center">
 <h3 class="text-xl font-bold" style="">Bancos Conectados</h3>
-<button class="text-primary font-bold text-sm" style="">Añadir Nuevo</button>
+<span class="text-primary font-bold text-sm" style="pointer-events:none;opacity:0.5">Añadir Nuevo</span>
 </div>
 <div class="space-y-3">
 <!-- Account 1 -->
@@ -1087,44 +1300,6 @@ tailwind.config = {
 </div>
 </div>
 </section>
-<!-- Settings Menu -->
-<section class="bg-surface-container-lowest rounded-lg overflow-hidden shadow-sm border border-outline-variant/15">
-<div class="p-4 border-b border-surface-container-high flex items-center justify-between">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-on-surface-variant" style="">settings</span>
-<span class="font-bold" style="">Ajustes de Cuenta</span>
-</div>
-</div>
-<nav class="flex flex-col">
-<a class="flex items-center justify-between p-5 hover:bg-surface-container-low transition-colors" href="#" style="">
-<div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-slate-500" style="">person_edit</span>
-<span class="text-sm font-medium" style="">Información Personal</span>
-</div>
-<span class="material-symbols-outlined text-on-surface-variant text-sm" style="">chevron_right</span>
-</a>
-<a class="flex items-center justify-between p-5 hover:bg-surface-container-low transition-colors" href="#" style="">
-<div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-slate-500" style="">security</span>
-<span class="text-sm font-medium" style="">Seguridad y Privacidad</span>
-</div>
-<span class="material-symbols-outlined text-on-surface-variant text-sm" style="">chevron_right</span>
-</a>
-<a class="flex items-center justify-between p-5 hover:bg-surface-container-low transition-colors" href="#" style="">
-<div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-slate-500" style="">notifications_active</span>
-<span class="text-sm font-medium" style="">Notificaciones</span>
-</div>
-<span class="material-symbols-outlined text-on-surface-variant text-sm" style="">chevron_right</span>
-</a>
-<a class="flex items-center justify-between p-5 hover:bg-surface-container-low transition-colors" href="#" style="">
-<div class="flex items-center gap-4 text-error">
-<span class="material-symbols-outlined" style="">logout</span>
-<span class="text-sm font-bold" style="">Cerrar Sesión</span>
-</div>
-</a>
-</nav>
-</section>
 </main>
     </div>
 
@@ -1135,8 +1310,8 @@ tailwind.config = {
     <span id="fab-icon" class="material-symbols-outlined" style="font-size:24px;font-variation-settings:'FILL' 1">add</span>
   </button>
 
-  <!-- Bottom Nav -->
-  <nav id="bottom-nav">
+  <!-- Bottom Nav — ahora 6 items -->
+  <nav id="bottom-nav" style="padding-left:8px;padding-right:8px">
     <div class="nav-item active" data-screen="0" onclick="goTo(0)">
       <span class="material-symbols-outlined">grid_view</span>
       <span class="nav-label">Inicio</span>
@@ -1148,6 +1323,10 @@ tailwind.config = {
     <div class="nav-item" data-screen="2" onclick="goTo(2)">
       <span class="material-symbols-outlined">ads_click</span>
       <span class="nav-label">Metas</span>
+    </div>
+    <div class="nav-item" data-screen="5" onclick="goTo(5)">
+      <span class="material-symbols-outlined">credit_card</span>
+      <span class="nav-label">Pagos</span>
     </div>
     <div class="nav-item" data-screen="3" onclick="goTo(3)">
       <span class="material-symbols-outlined">menu_book</span>
@@ -1492,7 +1671,7 @@ tailwind.config = {
             </div>
             <div style="flex:1;min-width:0">
               <p style="font-family:'Manrope',sans-serif;font-weight:800;font-size:1rem;color:#191c1d;margin:0 0 2px">Tomás Raffo</p>
-              <p style="font-size:0.8rem;color:#6e7979;margin:0">tomas@vyra.app</p>
+              <p style="font-size:0.8rem;color:#6e7979;margin:0">tomas@vyrafinanzas.app</p>
             </div>
             <span class="material-symbols-outlined" style="color:#006565;font-size:20px">chevron_right</span>
           </div>
@@ -1618,30 +1797,35 @@ tailwind.config = {
 
 <script>
   let current = 0;
-  const total = 5;
+  const total = 6;
+  const screenOrder = [0,1,2,5,3,4]; // nav order: screen-0,1,2,5,3,4 (DOM order)
   const track = document.getElementById('slider-track');
   const navItems = document.querySelectorAll('.nav-item');
   const dots = document.querySelectorAll('.dot');
   const screens = document.querySelectorAll('.screen');
 
+  // Map screen id → position in slider
+  function screenPos(id) { return screenOrder.indexOf(id); }
+
   function goTo(index) {
-    if (index < 0 || index >= total) return;
-    screens[current].classList.remove('visible');
-    screens[index].classList.add('visible');
+    const pos = screenPos(index);
+    if (pos < 0) return;
+    const curPos = screenPos(current);
+    screens[curPos].classList.remove('visible');
+    screens[pos].classList.add('visible');
     current = index;
-    track.style.transform = `translateX(-${index * 100}%)`;
+    track.style.transform = `translateX(-${pos * 100}%)`;
     navItems.forEach(item => item.classList.remove('active'));
-    navItems[index].classList.add('active');
+    navItems.forEach(item => { if (parseInt(item.dataset.screen) === index) item.classList.add('active'); });
     dots.forEach(d => d.classList.remove('active'));
-    dots[index].classList.add('active');
-    screens[index].scrollTop = 0;
+    if (dots[pos]) dots[pos].classList.add('active');
+    screens[pos].scrollTop = 0;
     updateFab(index);
   }
 
   function updateFab(index) {
     const fab = document.getElementById('fab-btn');
     const icon = document.getElementById('fab-icon');
-    // Show on Gastos (1) and Metas (2) only
     if (index === 1) {
       fab.style.display = 'flex';
       icon.textContent = 'add';
@@ -1663,6 +1847,10 @@ tailwind.config = {
   let dragOffset = 0;
 
   track.addEventListener('touchstart', (e) => {
+    if (modalOpen) return;
+    // Don't start swipe if touching an interactive element
+    const interactive = e.target.closest('button, a, input, textarea, select, [onclick]');
+    if (interactive) return;
     startX = e.touches[0].clientX;
     startY = e.touches[0].clientY;
     startScrollTop = screens[current].scrollTop;
@@ -1717,6 +1905,10 @@ tailwind.config = {
   let mouseDown = false;
   
   track.addEventListener('mousedown', (e) => {
+    if (modalOpen) return;
+    // Don't start drag if clicking on an interactive element
+    const interactive = e.target.closest('button, a, input, textarea, select, [onclick]');
+    if (interactive) return;
     mouseStartX = e.clientX;
     mouseDown = true;
     track.style.transition = 'none';
@@ -1746,19 +1938,19 @@ tailwind.config = {
 
   // Keyboard navigation
   document.addEventListener('keydown', (e) => {
+    if (modalOpen) return;
     if (e.key === 'ArrowRight') goTo(current + 1);
     if (e.key === 'ArrowLeft') goTo(current - 1);
   });
 
-  let lastScreen = 0;
+  let modalOpen = false;
 
   function openModal(modalId) {
-    lastScreen = current;
+    modalOpen = true;
     const modal = document.getElementById(modalId);
     const backdrop = document.getElementById('modal-backdrop');
     modal.style.display = 'flex';
     backdrop.style.display = 'block';
-    // Double rAF ensures display:flex is painted before transition starts
     requestAnimationFrame(() => requestAnimationFrame(() => {
       modal.classList.add('open');
       backdrop.classList.add('open');
@@ -1773,8 +1965,8 @@ tailwind.config = {
     modal.addEventListener('transitionend', () => {
       modal.style.display = 'none';
       backdrop.style.display = 'none';
+      modalOpen = false;
     }, { once: true });
-    goTo(lastScreen);
   }
 
   function toggleSwitch(id) {
@@ -1785,7 +1977,7 @@ tailwind.config = {
     thumb.style.transform = isOn ? 'translateX(0px)' : 'translateX(20px)';
   }
 
-  // ── Registro del Service Worker (PWA) ──
+  // PWA Service Worker
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('./sw.js')
@@ -1795,5 +1987,178 @@ tailwind.config = {
   }
 
 </script>
-</body>
-</html>
+
+<!-- MODAL: BIZUM ENVIAR -->
+<div id="modal-bizum-enviar" class="modal-sheet" style="display:none">
+  <div class="modal-inner">
+    <header class="modal-topbar">
+      <button class="modal-back-btn" onclick="closeModal('modal-bizum-enviar')">
+        <span class="material-symbols-outlined">arrow_back</span>
+      </button>
+      <span class="modal-topbar-title">Enviar con Bizum</span>
+      <div style="width:22px"></div>
+    </header>
+    <div class="modal-scroll">
+      <main class="px-6 pt-6 pb-12 max-w-md mx-auto space-y-6">
+        <!-- Importe -->
+        <div style="text-align:center;padding:24px 0 8px">
+          <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#9aacac;margin-bottom:8px">¿Cuánto quieres enviar?</p>
+          <div style="display:flex;align-items:center;justify-content:center;gap:4px">
+            <span style="font-family:'Manrope',sans-serif;font-size:2.5rem;font-weight:800;color:#006565">€</span>
+            <input type="number" placeholder="0,00" style="font-family:'Manrope',sans-serif;font-size:3rem;font-weight:800;color:#191c1d;border:none;outline:none;background:none;width:160px;text-align:left" />
+          </div>
+          <div style="width:100%;height:2px;background:linear-gradient(90deg,#006565,#93f993);border-radius:999px;margin-top:8px"></div>
+        </div>
+        <!-- Contacto -->
+        <div>
+          <label style="display:block;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#6e7979;margin-bottom:8px">Enviar a</label>
+          <div style="position:relative">
+            <span class="material-symbols-outlined" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#9aacac;font-size:20px">person_search</span>
+            <input type="text" placeholder="Nombre o teléfono" style="width:100%;border:1.5px solid #e5eaea;border-radius:12px;padding:12px 14px 12px 42px;font-family:'Inter',sans-serif;font-size:0.9rem;color:#191c1d;outline:none;background:#fafcfc" />
+          </div>
+        </div>
+        <!-- Contactos recientes -->
+        <div>
+          <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#9aacac;margin-bottom:10px">Recientes</p>
+          <div style="display:flex;gap:16px;overflow-x:auto;padding-bottom:4px">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0">
+              <div style="width:48px;height:48px;border-radius:50%;background:#e0fafa;display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;font-weight:800;color:#006565">ML</div>
+              <span style="font-size:0.72rem;font-weight:600;color:#3e4949">María</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0">
+              <div style="width:48px;height:48px;border-radius:50%;background:#e6fce6;display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;font-weight:800;color:#006e20">JR</div>
+              <span style="font-size:0.72rem;font-weight:600;color:#3e4949">Juan</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0">
+              <div style="width:48px;height:48px;border-radius:50%;background:#fff7ed;display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;font-weight:800;color:#d97706">AS</div>
+              <span style="font-size:0.72rem;font-weight:600;color:#3e4949">Ana</span>
+            </div>
+          </div>
+        </div>
+        <!-- Concepto -->
+        <div>
+          <label style="display:block;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#6e7979;margin-bottom:8px">Concepto (opcional)</label>
+          <input type="text" placeholder="Ej: Cena del viernes" style="width:100%;border:1.5px solid #e5eaea;border-radius:12px;padding:12px 14px;font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;background:#fafcfc" />
+        </div>
+        <button onclick="closeModal('modal-bizum-enviar')" style="width:100%;background:linear-gradient(135deg,#0a1172,#2d3adb);color:white;border:none;border-radius:14px;padding:16px;font-family:'Manrope',sans-serif;font-weight:800;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px">
+          <span class="material-symbols-outlined" style="font-size:18px;font-variation-settings:'FILL' 1">bolt</span>
+          Enviar Bizum
+        </button>
+      </main>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: BIZUM SOLICITAR -->
+<div id="modal-bizum-solicitar" class="modal-sheet" style="display:none">
+  <div class="modal-inner">
+    <header class="modal-topbar">
+      <button class="modal-back-btn" onclick="closeModal('modal-bizum-solicitar')">
+        <span class="material-symbols-outlined">arrow_back</span>
+      </button>
+      <span class="modal-topbar-title">Solicitar con Bizum</span>
+      <div style="width:22px"></div>
+    </header>
+    <div class="modal-scroll">
+      <main class="px-6 pt-6 pb-12 max-w-md mx-auto space-y-6">
+        <div style="text-align:center;padding:24px 0 8px">
+          <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#9aacac;margin-bottom:8px">¿Cuánto quieres solicitar?</p>
+          <div style="display:flex;align-items:center;justify-content:center;gap:4px">
+            <span style="font-family:'Manrope',sans-serif;font-size:2.5rem;font-weight:800;color:#006e20">€</span>
+            <input type="number" placeholder="0,00" style="font-family:'Manrope',sans-serif;font-size:3rem;font-weight:800;color:#191c1d;border:none;outline:none;background:none;width:160px;text-align:left" />
+          </div>
+          <div style="width:100%;height:2px;background:linear-gradient(90deg,#006e20,#93f993);border-radius:999px;margin-top:8px"></div>
+        </div>
+        <div>
+          <label style="display:block;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#6e7979;margin-bottom:8px">Solicitar a</label>
+          <div style="position:relative">
+            <span class="material-symbols-outlined" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#9aacac;font-size:20px">person_search</span>
+            <input type="text" placeholder="Nombre o teléfono" style="width:100%;border:1.5px solid #e5eaea;border-radius:12px;padding:12px 14px 12px 42px;font-family:'Inter',sans-serif;font-size:0.9rem;color:#191c1d;outline:none;background:#fafcfc" />
+          </div>
+        </div>
+        <div>
+          <label style="display:block;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#6e7979;margin-bottom:8px">Motivo (opcional)</label>
+          <input type="text" placeholder="Ej: Tu parte de la gasolina" style="width:100%;border:1.5px solid #e5eaea;border-radius:12px;padding:12px 14px;font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;background:#fafcfc" />
+        </div>
+        <button onclick="closeModal('modal-bizum-solicitar')" style="width:100%;background:linear-gradient(135deg,#006e20,#008080);color:white;border:none;border-radius:14px;padding:16px;font-family:'Manrope',sans-serif;font-weight:800;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px">
+          <span class="material-symbols-outlined" style="font-size:18px;font-variation-settings:'FILL' 1">south_west</span>
+          Enviar solicitud
+        </button>
+      </main>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: TARJETA VYRA -->
+<div id="modal-tarjeta" class="modal-sheet" style="display:none">
+  <div class="modal-inner">
+    <header class="modal-topbar">
+      <button class="modal-back-btn" onclick="closeModal('modal-tarjeta')">
+        <span class="material-symbols-outlined">arrow_back</span>
+      </button>
+      <span class="modal-topbar-title">Solicitar Tarjeta Vyra</span>
+      <div style="width:22px"></div>
+    </header>
+    <div class="modal-scroll">
+      <main class="px-6 pt-6 pb-12 max-w-md mx-auto space-y-6">
+        <!-- Card preview -->
+        <div style="background:linear-gradient(135deg,#003535,#006565);padding:24px;border-radius:20px;position:relative;overflow:hidden">
+          <div style="position:relative;z-index:1">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:32px">
+              <svg width="40" height="24" viewBox="0 0 40 24" fill="none"><rect width="40" height="24" rx="4" fill="rgba(255,255,255,0.15)"/><circle cx="15" cy="12" r="8" fill="rgba(255,255,255,0.5)"/><circle cx="25" cy="12" r="8" fill="rgba(255,255,255,0.3)"/></svg>
+              <span style="font-family:'Manrope',sans-serif;font-weight:800;font-size:1.1rem;color:rgba(255,255,255,0.9)">Vyra</span>
+            </div>
+            <p style="font-family:'Courier New',monospace;color:rgba(255,255,255,0.6);font-size:1rem;letter-spacing:0.25em;margin-bottom:20px">•••• •••• •••• ••••</p>
+            <div style="display:flex;justify-content:space-between">
+              <div>
+                <p style="font-size:0.6rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.1em">Titular</p>
+                <p style="font-family:'Manrope',sans-serif;font-weight:700;color:white">Tomás Raffo</p>
+              </div>
+              <div style="text-align:right">
+                <p style="font-size:0.6rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.1em">Caduca</p>
+                <p style="font-family:'Manrope',sans-serif;font-weight:700;color:white">••/••</p>
+              </div>
+            </div>
+          </div>
+          <div style="position:absolute;right:-20px;bottom:-20px;width:120px;height:120px;border-radius:50%;background:rgba(147,249,147,0.08)"></div>
+        </div>
+        <!-- Steps -->
+        <div style="background:#f5f7f7;border-radius:16px;padding:20px">
+          <p style="font-family:'Manrope',sans-serif;font-weight:700;font-size:0.88rem;margin-bottom:14px">¿Cómo funciona?</p>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;gap:12px;align-items:flex-start">
+              <div style="width:24px;height:24px;border-radius:50%;background:#006565;color:white;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:800;flex-shrink:0">1</div>
+              <p style="font-size:0.85rem;color:#3e4949;line-height:1.45">Rellena el formulario con tus datos. Sin papeleos, todo desde la app.</p>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start">
+              <div style="width:24px;height:24px;border-radius:50%;background:#006565;color:white;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:800;flex-shrink:0">2</div>
+              <p style="font-size:0.85rem;color:#3e4949;line-height:1.45">Verificamos tu identidad en menos de 24 horas.</p>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start">
+              <div style="width:24px;height:24px;border-radius:50%;background:#006565;color:white;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:800;flex-shrink:0">3</div>
+              <p style="font-size:0.85rem;color:#3e4949;line-height:1.45">Recibes tu tarjeta física en casa en 5–7 días hábiles. ¡Gratis!</p>
+            </div>
+          </div>
+        </div>
+        <!-- Form fields -->
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div>
+            <label style="display:block;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#6e7979;margin-bottom:6px">Dirección de envío</label>
+            <input type="text" placeholder="Calle, número, piso..." style="width:100%;border:1.5px solid #e5eaea;border-radius:12px;padding:12px 14px;font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;background:#fafcfc" />
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div>
+              <label style="display:block;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#6e7979;margin-bottom:6px">Ciudad</label>
+              <input type="text" placeholder="Madrid" style="width:100%;border:1.5px solid #e5eaea;border-radius:12px;padding:12px 14px;font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;background:#fafcfc" />
+            </div>
+            <div>
+              <label style="display:block;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#6e7979;margin-bottom:6px">Código postal</label>
+              <input type="text" placeholder="28001" style="width:100%;border:1.5px solid #e5eaea;border-radius:12px;padding:12px 14px;font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;background:#fafcfc" />
+            </div>
+          </div>
+        </div>
+        <button onclick="closeModal('modal-tarjeta')" style="width:100%;background:linear-gradient(135deg,#006565,#008080);color:white;border:none;border-radius:14px;padding:16px;font-family:'Manrope',sans-serif;font-weight:800;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px">
+          <span class="material-symbols-outlined" style="font-size:18px;font-variation-settings:'FILL' 1">credit_card</span>
+          Solicitar mi tarjeta
+        </button>
+        <p style="text-align:center;font-size:0.72rem;color:#9aacac;li

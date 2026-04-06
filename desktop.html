@@ -655,6 +655,10 @@ tailwind.config = {
         <span class="material-symbols-outlined">savings</span>
         Metas de Ahorro
       </a>
+      <a class="nav-link" data-panel="pagos" onclick="goTo('pagos',this)">
+        <span class="material-symbols-outlined">credit_card</span>
+        Pagos
+      </a>
       <a class="nav-link" data-panel="aprender" onclick="goTo('aprender',this)">
         <span class="material-symbols-outlined">school</span>
         Aprender
@@ -718,7 +722,8 @@ tailwind.config = {
       <!-- KPI row -->
       <div class="stat-grid">
         <div class="card main-gradient" style="padding:28px;position:relative;overflow:hidden">
-          <p style="font-size:0.75rem;font-weight:600;opacity:0.75;margin-bottom:6px;letter-spacing:0.08em;text-transform:uppercase">Saldo Total</p>
+          <p style="font-size:0.75rem;font-weight:600;opacity:0.75;margin-bottom:4px;letter-spacing:0.08em;text-transform:uppercase">Saldo Total</p>
+          <p style="font-size:0.72rem;opacity:0.55;margin-bottom:8px">Cuenta corriente · Efectivo · Pendiente de cobro</p>
           <p style="font-family:'Manrope',sans-serif;font-size:2.2rem;font-weight:800;letter-spacing:-0.04em;margin-bottom:10px">24.857,23 €</p>
           <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);padding:5px 12px;border-radius:999px">
             <span class="material-symbols-outlined icon-filled" style="font-size:14px">trending_up</span>
@@ -746,11 +751,12 @@ tailwind.config = {
         </div>
 
         <div class="card" style="padding:22px">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
             <span class="material-symbols-outlined icon-filled" style="color:#006565;font-size:22px">savings</span>
             <span class="badge badge-teal">65%</span>
           </div>
-          <p style="font-size:0.78rem;color:#6e7979;font-weight:500;margin-bottom:4px">Ahorro Total</p>
+          <p style="font-size:0.78rem;color:#6e7979;font-weight:500;margin-bottom:2px">Ahorro Total</p>
+          <p style="font-size:0.68rem;color:#bdc9c8;margin-bottom:6px">Wallets · Metas · Inversiones</p>
           <p style="font-family:'Manrope',sans-serif;font-size:1.6rem;font-weight:800;color:#191c1d">12.456 €</p>
         </div>
       </div>
@@ -771,37 +777,87 @@ tailwind.config = {
             <div class="progress-fill" style="width:74%"></div>
           </div>
 
-          <p style="font-family:'Manrope',sans-serif;font-weight:700;font-size:0.9rem;color:#191c1d;margin-bottom:12px">Velocidad de Gasto</p>
-          <div class="chart-bars">
-            <div class="chart-bar-wrap">
-              <div class="chart-bar" style="height:30%"></div>
-              <span style="font-size:0.62rem;font-weight:700;color:#9aacac;text-transform:uppercase">LUN</span>
+          <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4px">
+            <p style="font-family:'Manrope',sans-serif;font-weight:700;font-size:0.9rem;color:#191c1d">Gasto diario esta semana</p>
+            <span style="font-size:0.75rem;color:#9aacac">Total: <strong style="color:#191c1d">284,50 €</strong></span>
+          </div>
+          <p style="font-size:0.75rem;color:#9aacac;margin-bottom:14px">
+            Media: <strong style="color:#191c1d">40,64 €/día</strong> · 
+            <span style="color:#006565;font-weight:600">Límite: 46,67 €/día</span>
+          </p>
+          <div style="position:relative">
+            <!-- Dashed limit line -->
+            <div style="position:absolute;left:0;right:0;border-top:1.5px dashed rgba(0,101,101,0.3);pointer-events:none" id="limit-line-desktop"></div>
+            <div class="chart-bars" id="chart-desktop" style="height:120px;position:relative"></div>
+          </div>
+          <div id="chart-labels-desktop" style="display:flex;justify-content:space-between;margin-top:6px;padding:0 4px"></div>
+          <div style="display:flex;gap:16px;margin-top:12px;padding-top:10px;border-top:1px solid #eef1f1">
+            <div style="display:flex;align-items:center;gap:6px">
+              <div style="width:10px;height:10px;border-radius:3px;background:#006565"></div>
+              <span style="font-size:0.72rem;color:#9aacac">Dentro del límite</span>
             </div>
-            <div class="chart-bar-wrap">
-              <div class="chart-bar" style="height:25%"></div>
-              <span style="font-size:0.62rem;font-weight:700;color:#9aacac;text-transform:uppercase">MAR</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <div style="width:10px;height:10px;border-radius:3px;background:#f4a0a0"></div>
+              <span style="font-size:0.72rem;color:#9aacac">Supera el límite</span>
             </div>
-            <div class="chart-bar-wrap">
-              <div class="chart-bar highlight" style="height:65%"></div>
-              <span style="font-size:0.62rem;font-weight:700;color:#006565;text-transform:uppercase">MIÉ</span>
-            </div>
-            <div class="chart-bar-wrap">
-              <div class="chart-bar highlight" style="height:75%"></div>
-              <span style="font-size:0.62rem;font-weight:700;color:#006565;text-transform:uppercase">JUE</span>
-            </div>
-            <div class="chart-bar-wrap">
-              <div class="chart-bar" style="height:20%"></div>
-              <span style="font-size:0.62rem;font-weight:700;color:#9aacac;text-transform:uppercase">VIE</span>
-            </div>
-            <div class="chart-bar-wrap">
-              <div class="chart-bar" style="height:35%"></div>
-              <span style="font-size:0.62rem;font-weight:700;color:#9aacac;text-transform:uppercase">SÁB</span>
-            </div>
-            <div class="chart-bar-wrap">
-              <div class="chart-bar" style="height:15%"></div>
-              <span style="font-size:0.62rem;font-weight:700;color:#9aacac;text-transform:uppercase">DOM</span>
+            <div style="display:flex;align-items:center;gap:6px">
+              <div style="width:10px;height:10px;border-radius:3px;background:#e8ecec;border:1px dashed #bdc9c8"></div>
+              <span style="font-size:0.72rem;color:#9aacac">Sin datos</span>
             </div>
           </div>
+          <script>
+          (function(){
+            const days   = ['LUN','MAR','MIÉ','JUE','VIE','SÁB','DOM'];
+            const values = [38.2, 25.0, 89.5, 91.8, 18.0, 22.0, null];
+            const limit  = 46.67;
+            const maxVal = 100;
+            const chartH = 120;
+
+            const chart  = document.getElementById('chart-desktop');
+            const labelsEl = document.getElementById('chart-labels-desktop');
+            const limitLine = document.getElementById('limit-line-desktop');
+
+            // Position the dashed limit line
+            const limitPct = (limit / maxVal) * 100;
+            limitLine.style.bottom = (limitPct / 100 * chartH) + 'px';
+
+            days.forEach((day, i) => {
+              const val = values[i];
+              const pct = val !== null ? Math.round((val / maxVal) * 100) : 0;
+              const over = val !== null && val > limit;
+              const isToday = i === 6;
+
+              const wrap = document.createElement('div');
+              wrap.className = 'chart-bar-wrap';
+              wrap.style.position = 'relative';
+
+              // Euro label on top
+              const lbl = document.createElement('span');
+              lbl.style.cssText = 'font-size:0.6rem;font-weight:700;color:' + (val===null?'#bdc9c8':over?'#ba1a1a':'#006565') + ';white-space:nowrap';
+              lbl.textContent = val !== null ? val.toFixed(0)+'€' : '';
+              wrap.appendChild(lbl);
+
+              const bar = document.createElement('div');
+              bar.className = 'chart-bar' + (over ? '' : (val !== null ? ' highlight' : ''));
+              bar.style.height = (val !== null ? pct : 6) + '%';
+              if (over) bar.style.background = '#f4a0a0';
+              if (isToday) { bar.style.background = '#e8ecec'; bar.style.border = '1.5px dashed #bdc9c8'; }
+
+              // Hover tooltip
+              if (val !== null) {
+                wrap.title = day + ': ' + val.toFixed(2) + ' €' + (over ? ' ⚠ Supera el límite' : '');
+              }
+              wrap.appendChild(bar);
+              chart.appendChild(wrap);
+
+              // Day label
+              const dayEl = document.createElement('span');
+              dayEl.style.cssText = 'flex:1;text-align:center;font-size:0.62rem;font-weight:700;text-transform:uppercase;color:' + (isToday?'#bdc9c8':over?'#ba1a1a':'#9aacac');
+              dayEl.textContent = day;
+              labelsEl.appendChild(dayEl);
+            });
+          })();
+          </script>
         </div>
 
         <!-- Insights -->
@@ -1147,6 +1203,125 @@ tailwind.config = {
       </div>
     </div>
 
+    <!-- ══ PANEL: PAGOS ══ -->
+    <div class="panel" id="panel-pagos">
+
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:28px">
+        <div class="page-header" style="margin-bottom:0">
+          <div class="page-label">Servicios Financieros</div>
+          <div class="page-title">Pagos</div>
+          <div class="page-subtitle">Bizum y tarjeta Vyra en un solo lugar.</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+
+        <!-- Bizum -->
+        <div>
+          <!-- Hero -->
+          <div style="background:linear-gradient(135deg,#0a1172,#2d3adb);border-radius:16px 16px 0 0;padding:28px;position:relative;overflow:hidden">
+            <div style="position:relative;z-index:1">
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+                <div style="background:rgba(255,255,255,0.15);border-radius:12px;width:42px;height:42px;display:flex;align-items:center;justify-content:center">
+                  <span class="material-symbols-outlined icon-filled" style="color:white;font-size:22px">bolt</span>
+                </div>
+                <span style="font-family:'Manrope',sans-serif;font-weight:800;font-size:1.2rem;color:white">Bizum</span>
+              </div>
+              <p style="font-size:0.85rem;color:rgba(255,255,255,0.7);line-height:1.5">Envía y recibe dinero al instante usando solo el número de teléfono.</p>
+            </div>
+            <div style="position:absolute;right:-24px;top:-24px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,0.06)"></div>
+          </div>
+          <!-- Actions -->
+          <div style="background:white;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#f0f3f3">
+            <div onclick="openModal('modal-bizum-enviar')" style="background:white;padding:20px;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;transition:background .15s;border-radius:0 0 0 16px" onmouseover="this.style.background='#f5f7f7'" onmouseout="this.style.background='white'">
+              <div style="width:48px;height:48px;border-radius:50%;background:#e0fafa;display:flex;align-items:center;justify-content:center">
+                <span class="material-symbols-outlined icon-filled" style="color:#006565;font-size:24px">north_east</span>
+              </div>
+              <span style="font-family:'Manrope',sans-serif;font-weight:700;font-size:0.88rem;color:#191c1d">Enviar dinero</span>
+              <span style="font-size:0.72rem;color:#9aacac;text-align:center">Transfiere al instante</span>
+            </div>
+            <div onclick="openModal('modal-bizum-solicitar')" style="background:white;padding:20px;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;transition:background .15s;border-radius:0 0 16px 0" onmouseover="this.style.background='#f5f7f7'" onmouseout="this.style.background='white'">
+              <div style="width:48px;height:48px;border-radius:50%;background:#e6fce6;display:flex;align-items:center;justify-content:center">
+                <span class="material-symbols-outlined icon-filled" style="color:#006e20;font-size:24px">south_west</span>
+              </div>
+              <span style="font-family:'Manrope',sans-serif;font-weight:700;font-size:0.88rem;color:#191c1d">Solicitar dinero</span>
+              <span style="font-size:0.72rem;color:#9aacac;text-align:center">Pide tu parte</span>
+            </div>
+          </div>
+          <!-- Recientes -->
+          <div class="card" style="border-radius:0 0 16px 16px;border-top:none;padding:20px">
+            <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#9aacac;margin-bottom:12px">Últimos movimientos</p>
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <div class="cfg-row" style="border-radius:10px;padding:10px 8px">
+                <div style="width:38px;height:38px;border-radius:50%;background:#e0fafa;display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;font-weight:800;font-size:0.8rem;color:#006565;flex-shrink:0">ML</div>
+                <div style="flex:1"><p style="font-weight:600;font-size:0.85rem">María López</p><p style="font-size:0.72rem;color:#9aacac">Ayer · Cena</p></div>
+                <p style="font-family:'Manrope',sans-serif;font-weight:800;color:#ba1a1a;font-size:0.9rem">-18,50 €</p>
+              </div>
+              <div class="cfg-row" style="border-radius:10px;padding:10px 8px">
+                <div style="width:38px;height:38px;border-radius:50%;background:#e6fce6;display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;font-weight:800;font-size:0.8rem;color:#006e20;flex-shrink:0">JR</div>
+                <div style="flex:1"><p style="font-weight:600;font-size:0.85rem">Juan Ruiz</p><p style="font-size:0.72rem;color:#9aacac">Lunes · Gasolina</p></div>
+                <p style="font-family:'Manrope',sans-serif;font-weight:800;color:#006e20;font-size:0.9rem">+30,00 €</p>
+              </div>
+              <div class="cfg-row" style="border-radius:10px;padding:10px 8px">
+                <div style="width:38px;height:38px;border-radius:50%;background:#fff7ed;display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;font-weight:800;font-size:0.8rem;color:#d97706;flex-shrink:0">AS</div>
+                <div style="flex:1"><p style="font-weight:600;font-size:0.85rem">Ana Sanz</p><p style="font-size:0.72rem;color:#9aacac">Dom · Entradas cine</p></div>
+                <p style="font-family:'Manrope',sans-serif;font-weight:800;color:#ba1a1a;font-size:0.9rem">-12,00 €</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta Vyra -->
+        <div>
+          <!-- Card visual -->
+          <div style="background:linear-gradient(135deg,#003535,#006565);border-radius:16px;padding:28px;position:relative;overflow:hidden;margin-bottom:16px;min-height:180px">
+            <div style="position:relative;z-index:1">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px">
+                <svg width="44" height="28" viewBox="0 0 44 28" fill="none"><rect width="44" height="28" rx="5" fill="rgba(255,255,255,0.15)"/><circle cx="17" cy="14" r="9" fill="rgba(255,255,255,0.5)"/><circle cx="27" cy="14" r="9" fill="rgba(255,255,255,0.3)"/></svg>
+                <span style="font-family:'Manrope',sans-serif;font-weight:800;font-size:1.1rem;color:rgba(255,255,255,0.9)">Vyra</span>
+              </div>
+              <p style="font-family:'Courier New',monospace;color:rgba(255,255,255,0.6);font-size:1rem;letter-spacing:0.22em;margin-bottom:20px">•••• •••• •••• ••••</p>
+              <div style="display:flex;justify-content:space-between;align-items:flex-end">
+                <div>
+                  <p style="font-size:0.6rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.1em">Titular</p>
+                  <p style="font-family:'Manrope',sans-serif;font-weight:700;color:white;font-size:0.95rem">Tomás Raffo</p>
+                </div>
+                <span style="background:rgba(147,249,147,0.2);color:#93f993;font-size:0.7rem;font-weight:700;padding:4px 12px;border-radius:999px">Sin cuota anual</span>
+              </div>
+            </div>
+            <div style="position:absolute;right:-24px;bottom:-24px;width:130px;height:130px;border-radius:50%;background:rgba(255,255,255,0.04)"></div>
+          </div>
+          <!-- Beneficios -->
+          <div class="card" style="margin-bottom:14px">
+            <p style="font-family:'Manrope',sans-serif;font-weight:700;font-size:0.9rem;margin-bottom:14px">Beneficios incluidos</p>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:center;gap:10px">
+                <span class="material-symbols-outlined icon-filled" style="color:#006565;font-size:18px">check_circle</span>
+                <span style="font-size:0.85rem;color:#3e4949">Sin comisiones en compras en el extranjero</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px">
+                <span class="material-symbols-outlined icon-filled" style="color:#006565;font-size:18px">check_circle</span>
+                <span style="font-size:0.85rem;color:#3e4949">Cashback del <strong>1%</strong> en todas las compras</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px">
+                <span class="material-symbols-outlined icon-filled" style="color:#006565;font-size:18px">check_circle</span>
+                <span style="font-size:0.85rem;color:#3e4949">Retiradas en cajeros sin coste (hasta 300 €/mes)</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px">
+                <span class="material-symbols-outlined icon-filled" style="color:#006565;font-size:18px">check_circle</span>
+                <span style="font-size:0.85rem;color:#3e4949">Compatible con Apple Pay y Google Pay</span>
+              </div>
+            </div>
+          </div>
+          <button onclick="openModal('modal-tarjeta')" class="btn-primary">
+            <span class="material-symbols-outlined icon-filled" style="font-size:18px">credit_card</span>
+            Solicitar tarjeta gratis
+          </button>
+        </div>
+
+      </div>
+    </div>
+
     <!-- ══ PANEL: APRENDER ══ -->
     <div class="panel" id="panel-aprender">
 
@@ -1270,7 +1445,7 @@ tailwind.config = {
               </div>
             </div>
             <p style="font-family:'Manrope',sans-serif;font-weight:800;font-size:1.1rem">Tomás Raffo</p>
-            <p style="font-size:0.78rem;color:#9aacac;margin-bottom:16px">tomas@vyra.es</p>
+            <p style="font-size:0.78rem;color:#9aacac;margin-bottom:16px">tomas@vyrafinanzas.app</p>
             <button class="btn-secondary" style="width:100%;font-size:0.82rem;padding:9px">Editar perfil</button>
           </div>
           <!-- Health score -->
@@ -1324,7 +1499,7 @@ tailwind.config = {
                 </div>
                 <div style="flex:1">
                   <p style="font-weight:600;font-size:0.85rem">Email</p>
-                  <p style="font-size:0.75rem;color:#9aacac">tomas@vyra.es</p>
+                  <p style="font-size:0.75rem;color:#9aacac">tomas@vyrafinanzas.app</p>
                 </div>
                 <span class="material-symbols-outlined" style="color:#bdc9c8;font-size:18px">chevron_right</span>
               </div>
@@ -1621,6 +1796,7 @@ tailwind.config = {
     dashboard: 'Inicio',
     gastos: 'Gastos',
     metas: 'Metas de Ahorro',
+    pagos: 'Pagos',
     aprender: 'Aprender',
     perfil: 'Perfil',
     config: 'Configuración'
@@ -1630,6 +1806,7 @@ tailwind.config = {
     dashboard: { label: 'Nuevo gasto', modal: 'modal-gasto' },
     gastos: { label: 'Añadir gasto', modal: 'modal-gasto' },
     metas: { label: 'Nuevo objetivo', modal: 'modal-objetivo' },
+    pagos: null,
     aprender: null,
     perfil: null,
     config: null
@@ -1698,5 +1875,127 @@ tailwind.config = {
   // Init
   goTo('dashboard', document.querySelector('[data-panel="dashboard"]'));
 </script>
+
+<!-- MODAL: BIZUM ENVIAR -->
+<div class="modal-overlay" id="modal-bizum-enviar" onclick="if(event.target===this)closeModal('modal-bizum-enviar')">
+  <div class="modal-box" style="width:460px">
+    <div class="modal-header">
+      <p class="modal-title">Enviar con Bizum</p>
+      <button class="modal-close" onclick="closeModal('modal-bizum-enviar')"><span class="material-symbols-outlined" style="font-size:18px">close</span></button>
+    </div>
+    <div class="modal-body">
+      <div style="text-align:center;padding:16px 0 20px">
+        <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#9aacac;margin-bottom:10px">¿Cuánto quieres enviar?</p>
+        <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:8px">
+          <span style="font-family:Manrope,sans-serif;font-size:2rem;font-weight:800;color:#0a1172">€</span>
+          <input type="number" placeholder="0,00" style="font-family:Manrope,sans-serif;font-size:2.8rem;font-weight:800;color:#191c1d;border:none;outline:none;background:none;width:160px">
+        </div>
+        <div style="width:100%;height:2px;background:linear-gradient(90deg,#0a1172,#2d3adb);border-radius:999px"></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Enviar a</label>
+        <div style="position:relative">
+          <span class="material-symbols-outlined" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#9aacac;font-size:18px">person_search</span>
+          <input class="form-input" type="text" placeholder="Nombre o número de teléfono" style="padding-left:38px">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Recientes</label>
+        <div style="display:flex;gap:16px;padding:4px 0">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer"><div style="width:44px;height:44px;border-radius:50%;background:#e0fafa;display:flex;align-items:center;justify-content:center;font-family:Manrope,sans-serif;font-weight:800;color:#006565;font-size:0.8rem">ML</div><span style="font-size:0.72rem;font-weight:600;color:#3e4949">María</span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer"><div style="width:44px;height:44px;border-radius:50%;background:#e6fce6;display:flex;align-items:center;justify-content:center;font-family:Manrope,sans-serif;font-weight:800;color:#006e20;font-size:0.8rem">JR</div><span style="font-size:0.72rem;font-weight:600;color:#3e4949">Juan</span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer"><div style="width:44px;height:44px;border-radius:50%;background:#fff7ed;display:flex;align-items:center;justify-content:center;font-family:Manrope,sans-serif;font-weight:800;color:#d97706;font-size:0.8rem">AS</div><span style="font-size:0.72rem;font-weight:600;color:#3e4949">Ana</span></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Concepto (opcional)</label>
+        <input class="form-input" type="text" placeholder="Ej: Cena del viernes">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px">
+        <button class="btn-secondary" onclick="closeModal('modal-bizum-enviar')">Cancelar</button>
+        <button class="btn-primary" style="background:linear-gradient(135deg,#0a1172,#2d3adb)" onclick="closeModal('modal-bizum-enviar')"><span class="material-symbols-outlined icon-filled" style="font-size:16px">bolt</span> Enviar Bizum</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: BIZUM SOLICITAR -->
+<div class="modal-overlay" id="modal-bizum-solicitar" onclick="if(event.target===this)closeModal('modal-bizum-solicitar')">
+  <div class="modal-box" style="width:460px">
+    <div class="modal-header">
+      <p class="modal-title">Solicitar con Bizum</p>
+      <button class="modal-close" onclick="closeModal('modal-bizum-solicitar')"><span class="material-symbols-outlined" style="font-size:18px">close</span></button>
+    </div>
+    <div class="modal-body">
+      <div style="text-align:center;padding:16px 0 20px">
+        <p style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#9aacac;margin-bottom:10px">¿Cuánto quieres solicitar?</p>
+        <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:8px">
+          <span style="font-family:Manrope,sans-serif;font-size:2rem;font-weight:800;color:#006e20">€</span>
+          <input type="number" placeholder="0,00" style="font-family:Manrope,sans-serif;font-size:2.8rem;font-weight:800;color:#191c1d;border:none;outline:none;background:none;width:160px">
+        </div>
+        <div style="width:100%;height:2px;background:linear-gradient(90deg,#006e20,#93f993);border-radius:999px"></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Solicitar a</label>
+        <div style="position:relative">
+          <span class="material-symbols-outlined" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#9aacac;font-size:18px">person_search</span>
+          <input class="form-input" type="text" placeholder="Nombre o número de teléfono" style="padding-left:38px">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Motivo (opcional)</label>
+        <input class="form-input" type="text" placeholder="Ej: Tu parte de la gasolina">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px">
+        <button class="btn-secondary" onclick="closeModal('modal-bizum-solicitar')">Cancelar</button>
+        <button class="btn-primary" style="background:linear-gradient(135deg,#006e20,#008080)" onclick="closeModal('modal-bizum-solicitar')"><span class="material-symbols-outlined icon-filled" style="font-size:16px">south_west</span> Enviar solicitud</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: TARJETA VYRA -->
+<div class="modal-overlay" id="modal-tarjeta" onclick="if(event.target===this)closeModal('modal-tarjeta')">
+  <div class="modal-box" style="width:520px">
+    <div class="modal-header">
+      <p class="modal-title">Solicitar Tarjeta Vyra</p>
+      <button class="modal-close" onclick="closeModal('modal-tarjeta')"><span class="material-symbols-outlined" style="font-size:18px">close</span></button>
+    </div>
+    <div class="modal-body">
+      <div style="background:linear-gradient(135deg,#003535,#006565);border-radius:16px;padding:24px;margin-bottom:20px;position:relative;overflow:hidden">
+        <div style="position:relative;z-index:1">
+          <div style="display:flex;justify-content:space-between;margin-bottom:28px">
+            <svg width="44" height="28" viewBox="0 0 44 28" fill="none"><rect width="44" height="28" rx="5" fill="rgba(255,255,255,0.15)"/><circle cx="17" cy="14" r="9" fill="rgba(255,255,255,0.5)"/><circle cx="27" cy="14" r="9" fill="rgba(255,255,255,0.3)"/></svg>
+            <span style="font-family:Manrope,sans-serif;font-weight:800;color:rgba(255,255,255,0.9)">Vyra</span>
+          </div>
+          <p style="font-family:Courier New,monospace;color:rgba(255,255,255,0.6);letter-spacing:0.22em;margin-bottom:18px">•••• •••• •••• ••••</p>
+          <div style="display:flex;justify-content:space-between">
+            <div><p style="font-size:0.6rem;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.1em">Titular</p><p style="font-family:Manrope,sans-serif;font-weight:700;color:white">Tomás Raffo</p></div>
+            <span style="background:rgba(147,249,147,0.2);color:#93f993;font-size:0.7rem;font-weight:700;padding:4px 12px;border-radius:999px;align-self:flex-end">Gratis · Sin cuota</span>
+          </div>
+        </div>
+      </div>
+      <div style="background:#f5f7f7;border-radius:12px;padding:16px;margin-bottom:18px;display:flex;gap:20px">
+        <div style="text-align:center;flex:1"><div style="width:28px;height:28px;border-radius:50%;background:#006565;color:white;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:800;margin:0 auto 8px">1</div><p style="font-size:0.78rem;color:#3e4949;line-height:1.4">Rellena el formulario desde la app</p></div>
+        <div style="text-align:center;flex:1"><div style="width:28px;height:28px;border-radius:50%;background:#006565;color:white;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:800;margin:0 auto 8px">2</div><p style="font-size:0.78rem;color:#3e4949;line-height:1.4">Verificamos tu identidad en 24 h</p></div>
+        <div style="text-align:center;flex:1"><div style="width:28px;height:28px;border-radius:50%;background:#006565;color:white;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:800;margin:0 auto 8px">3</div><p style="font-size:0.78rem;color:#3e4949;line-height:1.4">Recibes la tarjeta en casa en 5–7 días</p></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Dirección de envío</label>
+        <input class="form-input" type="text" placeholder="Calle, número, piso...">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div class="form-group"><label class="form-label">Ciudad</label><input class="form-input" type="text" placeholder="Madrid"></div>
+        <div class="form-group"><label class="form-label">Código postal</label><input class="form-input" type="text" placeholder="28001"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px">
+        <button class="btn-secondary" onclick="closeModal('modal-tarjeta')">Cancelar</button>
+        <button class="btn-primary" onclick="closeModal('modal-tarjeta')"><span class="material-symbols-outlined icon-filled" style="font-size:16px">credit_card</span> Solicitar mi tarjeta</button>
+      </div>
+      <p style="text-align:center;font-size:0.72rem;color:#9aacac;margin-top:14px;line-height:1.5">Al solicitar aceptas los <span style="color:#006565;font-weight:600;cursor:pointer">términos y condiciones</span> de la Tarjeta Vyra.</p>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
